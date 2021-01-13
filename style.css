@@ -1,4 +1,6 @@
-
+*{
+    border: 0.1px solid gold;
+}
 .game-container{
     width: 1080px;
     display: flex;
@@ -14,12 +16,9 @@
 .sq div{
     width: 40px;
     height: 40px;
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* background-color:rgb(202, 198, 198); */
 }
 
-.user-grid {
+.user-grid, .comp-grid {
     width: 400px;
     height: 400px;
     margin: 10px;
@@ -31,7 +30,7 @@
 .comp-grid {
     width: 400px;
     height: 400px;
-    margin: 10px;
+    margin: 10px;   
     display: flex;
     flex-wrap: wrap;
     background-color:rgb(5, 22, 78);
@@ -49,7 +48,7 @@
     height: 40px;
 }
 
-.destroyer-hull{
+.destroyer-x{
     width: 80px;
     height: 40px;
     background-color: rgb(199, 28, 71);
@@ -58,7 +57,7 @@
     flex-wrap: nowrap;
 }
 
-.submarine-hull, .cruiser-hull{
+.submarine-x, .cruiser-x{
     width: 120px;
     height: 40px;
     background-color: rgb(199, 28, 71);
@@ -67,7 +66,7 @@
     flex-wrap: nowrap;
 }
 
-.battleship-hull{
+.battleship-x{
     width: 160px;
     height: 40px;
     background-color: rgb(199, 28, 71);
@@ -75,7 +74,7 @@
     display: flex;
     flex-wrap: nowrap;
 }
-.carrier-hull{
+.carrier-x{
     width: 200px;
     height: 40px;
     background-color: rgb(199, 28, 71);
@@ -88,7 +87,7 @@
     background-color: yellow;
 }
 
-.destroyer-hull-v{
+.destroyer-y{
     width: 40px;
     height: 80px;
     background-color: rgb(199, 28, 71);
@@ -97,7 +96,7 @@
     flex-wrap: nowrap;
 }
 
-.submarine-hull-v, .cruiser-hull-v{
+.submarine-y, .cruiser-y{
     width: 40px;
     height: 120px;
     background-color: rgb(199, 28, 71);
@@ -106,7 +105,7 @@
     flex-wrap: nowrap;
 }
 
-.battleship-hull-v{
+.battleship-y{
     width: 40px;
     height: 160px;
     background-color: rgb(199, 28, 71);
@@ -114,7 +113,7 @@
     display: flex;
     flex-wrap: nowrap;
 }
-.carrier-hull-v{
+.carrier-y{
     width: 40px;
     height: 200px;
     background-color: rgb(199, 28, 71);
