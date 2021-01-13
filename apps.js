@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded',() => {
 
     const startButton = document.querySelector('#start');
     const rotateButton = document.querySelector('#rotate');
-    const turnDisplay = document.querySelector('#whose-turn');
-    const infoDisplay = document.querySelector('#message');
+    const turnDisplay = document.querySelector('#turnMsg');
+    const gameDisplay = document.querySelector('#gameMsg');
 
     let isShipHorizontal = true; 
     let isGameOver = false;
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded',() => {
       const isAtLeftEdge = current.some(index => (randomStartPoint + index) % 10 === 0);
       
       if (!isUsed && !isAtRightEdge && !isAtLeftEdge) {
-        current.forEach(index => compSquares[randomStartPoint + index].classList.add('used', `comp_${ship.name}`))
+        current.forEach(index => compSquares[randomStartPoint + index].classList.add('used', `comp_${ship.name}`, 'compSq-hide'))
       } else {
         //to restart again autoGenerate so that the ship has a new random starting point, new directions & check again if sqIsUsed.
         randomGenerate(ship); 
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded',() => {
       } else if (!isShipHorizontal) {
         for(let i=0; i<selectedShipLength; i++) {
           console.log(parseInt(e.target.id))
-          userSquares[parseInt(e.target.id) + 10*i].classList.add('used', selectedShipClass);
+          userSquares[parseInt(e.target.id) + 10*i].classList.add('used', selectedShipClass); //remove selectedShipIndex to prevent y to be displaced by LHS/RHS
           console.log(userSquares[parseInt(e.target.id) + 10*i])
         }
       } else return;
@@ -256,6 +256,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
     userAttack = (square) => {
       console.log(`user start`);
+      gameDisplay.innerHTML = ''; //to clear all & any existing text
       
       let isCompSqUsed = square.classList.contains('used');
       let isCompSqHit = square.classList.contains('hit');
@@ -289,7 +290,7 @@ document.addEventListener('DOMContentLoaded',() => {
           userCheckWin();
 
         } else if(isCompSqHit) {
-          infoDisplay.innerHTML=`You've hit that square before. You lose a turn :(`
+          gameDisplay.innerHTML=`You've hit that square before. You lose a turn :(`
         }
       } else if(!isCompSqUsed) {
         square.classList.add('miss');
@@ -297,7 +298,7 @@ document.addEventListener('DOMContentLoaded',() => {
       
       if(!isGameOver) {
         currentPlayer = 'computer';
-        turnDisplay.innerHTML = `Computer's Turn`;
+        turnDisplay.innerHTML = `Computer's turn to Attack`;
         console.log(`${currentPlayer}'s turn`);
 
         setTimeout(computerAttack,1000);
@@ -328,34 +329,34 @@ document.addEventListener('DOMContentLoaded',() => {
       if(!isCompDestroyerSink && userDestroyerCount === 2) {
         isCompDestroyerSink = true;
         console.log(isCompDestroyerSink);  
-        infoDisplay.innerHTML=`You sunk computer's Destroyer`; 
+        gameDisplay.innerHTML=`You sunk computer's Destroyer`; 
       }
 
       if(!isCompSubmarineSink && userSubmarineCount === 3) {
         isCompSubmarineSink = true;
         console.log(isCompSubmarineSink);  
-        infoDisplay.innerHTML=`You sunk computer's Submarine`; 
+        gameDisplay.innerHTML=`You sunk computer's Submarine`; 
       }
 
       if(!isCompCruiserSink && userCruiserCount === 3) {
         isCompCruiserSink = true;
         console.log(isCompCruiserSink);  
-        infoDisplay.innerHTML=`You sunk computer's Cruiser`; 
+        gameDisplay.innerHTML=`You sunk computer's Cruiser`; 
       }
 
       if(!isCompBattleshipSink && userBattleshipCount === 4) {
         isCompBattleshipSink = true;
         console.log(isCompBattleshipSink);  
-        infoDisplay.innerHTML=`You sunk computer's Battleship`; 
+        gameDisplay.innerHTML=`You sunk computer's Battleship`; 
       }
 
       if(!isCompCarrierSink && userCarrierCount === 5) {
         isCompCarrierSink = true;
         console.log(isCompCarrierSink);  
-        infoDisplay.innerHTML=`You sunk computer's Carrier`; 
+        gameDisplay.innerHTML=`You sunk computer's Carrier`; 
       }
       if(isCompDestroyerSink && isCompSubmarineSink && isCompCruiserSink && isCompBattleshipSink && isCompCarrierSink) {
-        infoDisplay.innerHTML= "YOU WIN";
+        gameDisplay.innerHTML= "YOU WIN";
         console.log('YOU WIN');
         gameOver();
         return;
@@ -383,6 +384,7 @@ document.addEventListener('DOMContentLoaded',() => {
     //---TO RE-DO. FOLLOW PLAYER ATTACK FUNCTION ---//
     computerAttack = () => {
       console.log(`computer Start`);
+      gameDisplay.innerHTML = ''; //to clear all & any existing text
       
       let randomNum = Math.floor(Math.random()*100);
       let isUserSqUsed = userSquares[randomNum].classList.contains('used');
@@ -435,7 +437,7 @@ document.addEventListener('DOMContentLoaded',() => {
       if(!isGameOver) {
         currentPlayer = 'user';
         console.log(`${currentPlayer}'s turn`);
-        turnDisplay.innerHTML = `Player's Turn`;
+        turnDisplay.innerHTML = `Player's turn to Attack`;
 
       } else return;
     }
@@ -464,35 +466,34 @@ document.addEventListener('DOMContentLoaded',() => {
       if(!isUserDestroyerSink && compDestroyerCount === 2) {
         isUserDestroyerSink = true;
         console.log(isUserDestroyerSink);  
-        infoDisplay.innerHTML=`Computer sunk your Destroyer`; 
+        gameDisplay.innerHTML=`Computer sunk your Destroyer`; 
       }
       if(!isUserSubmarineSink && compSubmarineCount === 3) {
         isUserSubmarineSink = true;
         console.log(isUserSubmarineSink);  
-        infoDisplay.innerHTML=`Computer sunk your Submarine`; 
+        gameDisplay.innerHTML=`Computer sunk your Submarine`; 
       }
       if(!isUserCruiserSink && compCruiserCount === 3) {
         isUserCruiserSink = true;
         console.log(isUserCruiserSink);  
-        infoDisplay.innerHTML=`Computer sunk your Cruiser`; 
+        gameDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
       if(!isUserBattleshipSink && compBattleshipCount === 4) {
         isUserBattleshipSink = true;
         console.log(isUserBattleshipSink);  
-        infoDisplay.innerHTML=`Computer sunk your Cruiser`;
+        gameDisplay.innerHTML=`Computer sunk your Cruiser`;
       }
       if(!isUserCarrierSink && compCarrierCount === 5) {
         isUserCarrierSink = true;
         console.log(isUserCarrierSink);  
-        infoDisplay.innerHTML=`Computer sunk your Cruiser`; 
+        gameDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
       if(isUserDestroyerSink && isUserSubmarineSink && isUserCruiserSink && isUserBattleshipSink && isUserCarrierSink) {
-        infoDisplay.innerHTML= "COMPUTER WIN";
+        gameDisplay.innerHTML= "COMPUTER WIN";
         console.log('COMP WIN');
         gameOver();
         return;
       }
-
     }
 
   //------------------------------END OF COMPUTER CHECK WIN LOGIC-------------------------------//
@@ -512,6 +513,7 @@ document.addEventListener('DOMContentLoaded',() => {
       isGameOver = true;
       startButton.removeEventListener('click',playGame);
       rotateButton.removeEventListener('click',rotate);
+      
       return;
     }
 
@@ -523,6 +525,8 @@ document.addEventListener('DOMContentLoaded',() => {
         compSquares.forEach(square => square.addEventListener('click',()=> {
           userAttack(square);
         }));
+        rotateButton.style.display = 'none';
+        turnDisplay.innerHTML = 'Player starts first. Click on Computer grid to start the attack!';
       }
     }
 

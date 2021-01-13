@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&display=swap');
+
+
+body{
+    background-image: url(/images/Blue_Ship.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Overlock', sans-serif;
+
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-title{
+    font-family: 'Bangers', cursive;
+    font-size: 125px;
+    margin-top: 5%;
+    margin-bottom:  2%;
+
+}
+.instructions{
+    padding: 10px 30px;
+    background-color: rgba(0,0,0,0.5); 
+    margin-bottom: 30px;
+    color: white;
+    max-width: 40%;
+}
+.buttons{
+    font-size: 12px;
+    background-color: #3d3c4b;
+    padding: 10px 30px;
+    color: White;
+    border-radius: 4vh;
+    appearance: button;
+}

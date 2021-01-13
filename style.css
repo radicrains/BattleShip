@@ -1,120 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&display=swap');
 
-.game-container{
-    width: 1080px;
+
+body{
+    background-image: url(/images/Blue_Ship.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Overlock', sans-serif;
+}
+
+.buttons{
+    font-size: 12px;
+    background-color: #3d3c4b;
+    padding: 10px 30px;
+    color: White;
+    border-radius: 4vh;
+    appearance: button;
+}
+
+.gameButtons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.shipButtons{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: auto;
 }
-.container{
+
+.main-container{
+    height: 100vh;
+
+}
+
+.game-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.infor-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid{
+    margin: 2vmin;
+    display:grid;
+    background-color: #3d3c4be3;
+    grid-template-rows: repeat(10, 4.6vmin);
+    grid-template-columns: repeat(10, 4.6vmin);
+}
+.grid-container{
     display: flex;
 }
 
 .sq div{
-    width: 40px;
-    height: 40px;
+    border: 1px solid hsla(0,0%,100%,.2);
 }
 
-.user-grid, .comp-grid {
-    width: 400px;
-    height: 400px;
-    margin: 10px;
+.draggedShips{
+    display: flex;
+}
+
+.ship-placement{
+    display: flex;
+}
+
+.ship > div{
+    width: 4.6vmin;
+    height: 4.6vmin;
+}
+#turnMsg, #gameMsg{
+    display: flex;
+    justify-content: center;
+}
+.grid-title{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 120%;
+}
+.ship{
     display: flex;
     flex-wrap: wrap;
-    background-color:rgb(34, 27, 27);
+    margin: 1vmin;
+    width: calc(4.6vmin * var(--width,1));
+    height: calc(4.6vmin * var(--height,1));
 }
-
-.comp-grid {
-    width: 400px;
-    height: 400px;
-    margin: 10px;   
-    display: flex;
-    flex-wrap: wrap;
-    background-color:rgb(5, 22, 78);
-}
-
-.ship-placement {
-    width: 230px;
-    height: 230px;
-    margin: 10px;
-}
-
-.ship div{
-    width: 40px;
-    height: 40px;
-}
-
 .destroyer-x{
-    width: 80px;
-    height: 40px;
-    background-color: rgb(199, 28, 71);
+    --width: 2;
+    --height: 1;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
-
 .submarine-x, .cruiser-x{
-    width: 120px;
-    height: 40px;
-    background-color: rgb(199, 28, 71);
+    --width: 3;
+    --height: 1;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
-
 .battleship-x{
-    width: 160px;
-    height: 40px;
-    background-color: rgb(199, 28, 71);
+    --width: 4;
+    --height: 1;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
-
 .carrier-x{
-    width: 200px;
-    height: 40px;
-    background-color: rgb(199, 28, 71);
+    --width: 5;
+    --height: 1;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
-
 .used{
-    background-color: yellow;
+    background-color: rgba(248, 187, 96, 0.562);
+}
+.compSq-hide{
+    background-color: #3d3c4bd7; /*#3d3c4bd7*/
 }
 
 .destroyer-y{
-    width: 40px;
-    height: 80px;
-    background-color: rgb(199, 28, 71);
+    --width: 1;
+    --height: 2;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
 
 .submarine-y, .cruiser-y{
-    width: 40px;
-    height: 120px;
-    background-color: rgb(199, 28, 71);
+    --width: 1;
+    --height: 3;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
 
 .battleship-y{
-    width: 40px;
-    height: 160px;
-    background-color: rgb(199, 28, 71);
+    --width: 1;
+    --height: 4;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
 }
 .carrier-y{
-    width: 40px;
-    height: 200px;
-    background-color: rgb(199, 28, 71);
+    --width: 1;
+    --height: 5;
+    background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
     flex-wrap: nowrap;
