@@ -1,6 +1,4 @@
-*{
-    border: 0.1px solid gold;
-}
+
 .game-container{
     width: 1080px;
     display: flex;
@@ -40,7 +38,6 @@
     width: 230px;
     height: 230px;
     margin: 10px;
-
 }
 
 .ship div{
@@ -74,6 +71,7 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
 .carrier-x{
     width: 200px;
     height: 40px;
@@ -121,9 +119,11 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
 .hit{
     background-color: red;
 }
+
 .miss{
     background-color: white;
 }

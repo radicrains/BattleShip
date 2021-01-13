@@ -216,8 +216,8 @@ document.addEventListener('DOMContentLoaded',() => {
       } else if (!isShipHorizontal) {
         for(let i=0; i<selectedShipLength; i++) {
           console.log(parseInt(e.target.id))
-          userSquares[parseInt(e.target.id) - selectedShipIndex + 10*i].classList.add('used', selectedShipClass);
-          console.log(userSquares[parseInt(e.target.id) - selectedShipIndex + 10*i])
+          userSquares[parseInt(e.target.id) + 10*i].classList.add('used', selectedShipClass);
+          console.log(userSquares[parseInt(e.target.id) + 10*i])
         }
       } else return;
 
@@ -324,31 +324,35 @@ document.addEventListener('DOMContentLoaded',() => {
     let isCompCarrierSink = false;
 
     userCheckWin = () => {
-      
-      if(userDestroyerCount === 2) {
+
+      if(!isCompDestroyerSink && userDestroyerCount === 2) {
         isCompDestroyerSink = true;
         console.log(isCompDestroyerSink);  
-        infoDisplay.innerHTML=`You sunk computer's Destroyer`; // why never display?
+        infoDisplay.innerHTML=`You sunk computer's Destroyer`; 
       }
-      if(userSubmarineCount === 3) {
+
+      if(!isCompSubmarineSink && userSubmarineCount === 3) {
         isCompSubmarineSink = true;
-        console.log(isCompSubmarineSink); 
-        infoDisplay.innerHTML='You sunk computer\'s Submarine'; // why never display?
+        console.log(isCompSubmarineSink);  
+        infoDisplay.innerHTML=`You sunk computer's Submarine`; 
       }
-      if(userCruiserCount === 3) {
+
+      if(!isCompCruiserSink && userCruiserCount === 3) {
         isCompCruiserSink = true;
-        console.log(isCompCruiserSink); 
-        infoDisplay.innerHTML='You sunk computer\'s Cruiser'; // why never display?
+        console.log(isCompCruiserSink);  
+        infoDisplay.innerHTML=`You sunk computer's Cruiser`; 
       }
-      if(userBattleshipCount === 4) {
+
+      if(!isCompBattleshipSink && userBattleshipCount === 4) {
         isCompBattleshipSink = true;
-        console.log(isCompBattleshipSink); 
-        infoDisplay.innerHTML='You sunk computer\'s Battleship'; // why never display?
+        console.log(isCompBattleshipSink);  
+        infoDisplay.innerHTML=`You sunk computer's Battleship`; 
       }
-      if(userCarrierCount === 5) {
+
+      if(!isCompCarrierSink && userCarrierCount === 5) {
         isCompCarrierSink = true;
-        console.log(isCompCarrierSink); 
-        infoDisplay.innerHTML='You sunk computer\'s Carrier'; // why never display?
+        console.log(isCompCarrierSink);  
+        infoDisplay.innerHTML=`You sunk computer's Carrier`; 
       }
       if(isCompDestroyerSink && isCompSubmarineSink && isCompCruiserSink && isCompBattleshipSink && isCompCarrierSink) {
         infoDisplay.innerHTML= "YOU WIN";
@@ -456,30 +460,31 @@ document.addEventListener('DOMContentLoaded',() => {
 
     //---TO RE-DO. FOLLOW PLAYER ATTACK FUNCTION ---//
     compCheckWin = () => {
-      if(compDestroyerCount === 2) {
+
+      if(!isUserDestroyerSink && compDestroyerCount === 2) {
         isUserDestroyerSink = true;
         console.log(isUserDestroyerSink);  
-        infoDisplay.innerHTML=`Computer sunk your Destroyer`; // why never display?
+        infoDisplay.innerHTML=`Computer sunk your Destroyer`; 
       }
-      if(compSubmarineCount === 3) {
+      if(!isUserSubmarineSink && compSubmarineCount === 3) {
         isUserSubmarineSink = true;
-        console.log(isUserSubmarineSink); 
-        infoDisplay.innerHTML='Computer sunk your Submarine'; // why never display?
+        console.log(isUserSubmarineSink);  
+        infoDisplay.innerHTML=`Computer sunk your Submarine`; 
       }
-      if(compCruiserCount === 3) {
+      if(!isUserCruiserSink && compCruiserCount === 3) {
         isUserCruiserSink = true;
-        console.log(isUserCruiserSink); 
-        infoDisplay.innerHTML='Computer sunk your Cruiser'; // why never display?
+        console.log(isUserCruiserSink);  
+        infoDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
-      if(compBattleshipCount === 4) {
+      if(!isUserBattleshipSink && compBattleshipCount === 4) {
         isUserBattleshipSink = true;
-        console.log(isUserBattleshipSink); 
-        infoDisplay.innerHTML='Computer sunk your Battleship'; // why never display?
+        console.log(isUserBattleshipSink);  
+        infoDisplay.innerHTML=`Computer sunk your Cruiser`;
       }
-      if(compCarrierCount === 5) {
+      if(!isUserCarrierSink && compCarrierCount === 5) {
         isUserCarrierSink = true;
-        console.log(isUserCarrierSink); 
-        infoDisplay.innerHTML='Computer sunk your Carrier'; // why never display?
+        console.log(isUserCarrierSink);  
+        infoDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
       if(isUserDestroyerSink && isUserSubmarineSink && isUserCruiserSink && isUserBattleshipSink && isUserCarrierSink) {
         infoDisplay.innerHTML= "COMPUTER WIN";
@@ -487,6 +492,7 @@ document.addEventListener('DOMContentLoaded',() => {
         gameOver();
         return;
       }
+
     }
 
   //------------------------------END OF COMPUTER CHECK WIN LOGIC-------------------------------//
