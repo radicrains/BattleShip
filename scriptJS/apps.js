@@ -1,4 +1,15 @@
-document.addEventListener('DOMContentLoaded',() => {
+/* NOTE TO SELF:
+Use class to identify the following:
+- user & comps grids -> each box to be ID/unique
+- User ships / ship names
+- comp ships / ship names
+- sq missed
+- sq hit
+- sq sinks
+
+*/
+
+$(() => {
 
   //--------------------USER & COMP BOARD CREATION--------------------//
    /* 
@@ -26,13 +37,10 @@ document.addEventListener('DOMContentLoaded',() => {
   //
   //
   //
-  //--------------------RANDOM GENERATION OF COMPUTER'S SHIP ON COMP GRID--------------------//
+  //--------------------GENERATION OF USER'S SHIP--------------------//
   /* 
-   This whole section generate comp's ship on comp's grid by:
-   1) Defining the orientation of the ship (horizontally / vertically)
-   2) based on the direction, Identify the starting point of the ship with the following considerations:
-      a) ensure that comp ship generate does not overflow to col 0 or col 9. (else 3 ship will be 2 or 1 if overflow the grid)
-      b) ensuring that the comp ship does not overlap with existing ships on comp's grid. 
+   This whole section generate user's ship on ship placement for user to drag & drop:
+   
   */
 
   const shipArray = [
@@ -56,13 +64,45 @@ document.addEventListener('DOMContentLoaded',() => {
     directions: [[0, 1, 2, 3, 4], //if ship is horizontal
       [0, 10, 20, 30, 40]]}       //if ship is vertical
   ]      
-  
 
+  userShips=(array)=>{
+    for(j=0;j<array.length; j++){
+      userSq(array[j]);
+      // console.log(array[j])
+    }
+  }
+
+  userSq = (ship) => {
+    for(i=0; i<ship.directions[0].length; i++) {
+      const $shipContainer = $(`.${ship.name}-x`);
+      // console.log($shipContainer);
+      const $newSq = $('<div>').attr('id',`${ship.name}-${i}`).addClass(`${ship.name}`);
+      // console.log($newSq);
+      $shipContainer.append($newSq);
+    }
+  }
+
+  userShips(shipArray);
+  
+  //--------------------END GENERATION OF USER'S SHIP--------------------//
+  //
+  //
+  //
+  //--------------------RANDOM GENERATION OF COMPUTER'S SHIP ON COMP GRID--------------------//
+  /* 
+   This whole section generate comp's ship on comp's grid by:
+   1) Defining the orientation of the ship (horizontally / vertically)
+   2) based on the direction, Identify the starting point of the ship with the following considerations:
+      a) ensure that comp ship generate does not overflow to col 0 or col 9. (else 3 ship will be 2 or 1 if overflow the grid)
+      b) ensuring that the comp ship does not overlap with existing ships on comp's grid. 
+  */
+
+ 
   //loop array to generate random comp ship squares
   generateCompShip= (array) => {
     for (let i=0; i<array.length; i++) {
       randomGenerate(array[i]);
-      console.log(i);
+      // console.log(i);
     }
   };
 
@@ -82,13 +122,13 @@ document.addEventListener('DOMContentLoaded',() => {
       // console.log(randomStartPoint);
     }
 
-
-    //To check grid for squares that has been used by other ships (to avoid overlapse) & does not overflow to right edge or left edge
+    
+    //To check grid if ANY squares (in the grid) that has been used by other ships (to avoid overlapse) & does not overflow to right edge or left edge
     const isUsed = current.some(index => compSquares[randomStartPoint + index].classList.contains('used'));
     const isAtRightEdge = current.some(index => (randomStartPoint + index) % 10 === 9);
     const isAtLeftEdge = current.some(index => (randomStartPoint + index) % 10 === 0);
     
-    // check & "generate" ship by adding class to the squares (for ease of identification later)
+    // check & "generate" ship if all checks are clear (adding class ship name to the squares for ease of identification).
     // else to restart again so that the ship has a new random starting point, new directions & check again if sqIsUsed.
     if (!isUsed && !isAtRightEdge && !isAtLeftEdge) {
       current.forEach(index => compSquares[randomStartPoint + index].classList.add('used', `comp_${ship.name}`, 'compSq-hide'))
@@ -111,40 +151,42 @@ document.addEventListener('DOMContentLoaded',() => {
    - press rotate again will revert back to horizontal (X).
    
   */
+
   const rotateButton = document.querySelector('#rotate');
-  const destroyer = document.querySelector('.destroyer-x');
-  const submarine = document.querySelector('.submarine-x');
-  const cruiser = document.querySelector('.cruiser-x');
-  const battleship = document.querySelector('.battleship-x');
-  const carrier = document.querySelector('.carrier-x');
+  const $destroyer = $('.destroyer-x');
+  const $submarine = $('.submarine-x');
+  const $cruiser = $('.cruiser-x');
+  const $battleship = $('.battleship-x');
+  const $carrier = $('.carrier-x');
 
   let isShipHorizontal = true; 
 
 
   rotateShip = () => {
     if (isShipHorizontal) {
-      destroyer.classList.toggle('destroyer-y');
-      submarine.classList.toggle('submarine-y');
-      cruiser.classList.toggle('cruiser-y');
-      battleship.classList.toggle('battleship-y');
-      carrier.classList.toggle('carrier-y');
+      $destroyer.toggleClass('destroyer-y');
+      $submarine.toggleClass('submarine-y');
+      $cruiser.toggleClass('cruiser-y');
+      $battleship.toggleClass('battleship-y');
+      $carrier.toggleClass('carrier-y');
 
       isShipHorizontal = false;
-      console.log(isShipHorizontal);
+      // console.log(isShipHorizontal);
 
     } else if (!isShipHorizontal){
-      destroyer.classList.toggle('destroyer-y');
-      submarine.classList.toggle('submarine-y');
-      cruiser.classList.toggle('cruiser-y');
-      battleship.classList.toggle('battleship-y');
-      carrier.classList.toggle('carrier-y');
+      $destroyer.toggleClass('destroyer-y');
+      $submarine.toggleClass('submarine-y');
+      $cruiser.toggleClass('cruiser-y');
+      $battleship.toggleClass('battleship-y');
+      $carrier.toggleClass('carrier-y');
 
       isShipHorizontal = true
-      console.log(isShipHorizontal);
+      // console.log(isShipHorizontal);
 
     }
   }
 
+  // $rotateButton.on('click', rotateShip);
   rotateButton.addEventListener('click', rotateShip);
 
   //--------------------END OF ROTATE BUTTON EVENT LISTENER FOR USER--------------------//
@@ -206,7 +248,7 @@ document.addEventListener('DOMContentLoaded',() => {
     }
 
     dragDrop = (e) => {
-      selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1));
+      selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1)); //SOMETHING NEW: substr(). "extracts" the string you want.
       //logs: 1 ----> as user select destroyer in 2nd tile. [0,1]
 
       if(isShipHorizontal) {
@@ -215,7 +257,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
           //'generate' the ships in user grid by adding class 
           userSquares[parseInt(e.target.id) - selectedShipIndex + i].classList.add('used', selectedShipClass);
-          // logs: [99-1+ (0 or 1)] -> sq1 = 98. sq2 = 99
+          // logs: [99-1 + (0 & 1)] -> sq1 = 98. sq2 = 99 --> this e.target is the user grid e.target (when we drop at sq 99).
         }
 
       } else if (!isShipHorizontal) {
@@ -249,6 +291,7 @@ document.addEventListener('DOMContentLoaded',() => {
     const startButton = document.querySelector('#start');
     const turnDisplay = document.querySelector('#turnMsg');
     const gameDisplay = document.querySelector('#gameMsg');
+    const audioBoom = document.querySelector('#boom');
     
     let isGameOver = false;
     let currentPlayer = 'user';
@@ -285,6 +328,7 @@ document.addEventListener('DOMContentLoaded',() => {
       if(isCompSqUsed) {
         if(!isCompSqHit) {
           square.classList.add('hit');
+          audioBoom.play();
 
           if (square.classList.contains('comp_destroyer')){
             userDestroyerCount++;
@@ -321,7 +365,7 @@ document.addEventListener('DOMContentLoaded',() => {
         turnDisplay.innerHTML = `Computer's turn to Attack`;
         console.log(`${currentPlayer}'s turn`);
 
-        setTimeout(computerAttack,1000);
+        setTimeout(computerAttack,2000);
       } else return;
     }
 
@@ -362,7 +406,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       if(!isCompSubmarineSink && userSubmarineCount === 3) {
         isCompSubmarineSink = true;
-        console.log(isCompSubmarineSink);  
+        // console.log(isCompSubmarineSink);  
         gameDisplay.innerHTML=`You sunk computer's Submarine`; 
       }
 
@@ -420,33 +464,33 @@ document.addEventListener('DOMContentLoaded',() => {
       let isUserSqHit = userSquares[randomNum].classList.contains('hit');
       let isUserSqMiss = userSquares[randomNum].classList.contains('miss');
 
-      console.log(userSquares[randomNum]);
+      // console.log(userSquares[randomNum]);
 
       if(isUserSqUsed) {
         if(!isUserSqHit) {
           userSquares[randomNum].classList.add('hit');
-          console.log(`Computer hits you!`);
-          console.log(userSquares[randomNum]);
+          // console.log(`Computer hits you!`);
+          // console.log(userSquares[randomNum]);
 
           if (userSquares[randomNum].classList.contains('destroyer')){
             compDestroyerCount++;
-            console.log(`Computer hits your destroyer: ${compDestroyerCount}`);
+            // console.log(`Computer hits your destroyer: ${compDestroyerCount}`);
           } 
           if(userSquares[randomNum].classList.contains('submarine')){
             compSubmarineCount++;
-            console.log(`Computer hits your submarine: ${compSubmarineCount}`);
+            // console.log(`Computer hits your submarine: ${compSubmarineCount}`);
           } 
           if(userSquares[randomNum].classList.contains('cruiser')){
             compCruiserCount++;
-            console.log(`Computer hits your cruiser: ${compCruiserCount}`);
+            // console.log(`Computer hits your cruiser: ${compCruiserCount}`);
           }
           if(userSquares[randomNum].classList.contains('battleship')){
             compBattleshipCount++;
-            console.log(`Computer hits your battleship: ${compBattleshipCount}`);
+            // console.log(`Computer hits your battleship: ${compBattleshipCount}`);
           }
           if(userSquares[randomNum].classList.contains('carrier')){
             compCarrierCount++;
-            console.log(`Computer hits your carrier: ${compCarrierCount}`);
+            // console.log(`Computer hits your carrier: ${compCarrierCount}`);
           }
         }else if(isUserSqHit){
           computerAttack();
@@ -454,8 +498,8 @@ document.addEventListener('DOMContentLoaded',() => {
         }
       } else if(!isUserSqUsed && !isUserSqMiss) {
         userSquares[randomNum].classList.add('miss');
-        console.log(`Computer misses your ship!`);
-        console.log(userSquares[randomNum]);
+        // console.log(`Computer misses your ship!`);
+        // console.log(userSquares[randomNum]);
       } else if(isUserSqMiss) {
         computerAttack();
         return;
@@ -465,7 +509,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       if(!isGameOver) {
         currentPlayer = 'user';
-        console.log(`${currentPlayer}'s turn`);
+        // console.log(`${currentPlayer}'s turn`);
         turnDisplay.innerHTML = `Player's turn to Attack`;
 
       } else return;
@@ -555,19 +599,21 @@ document.addEventListener('DOMContentLoaded',() => {
   //------------------------------START IMGUR API-------------------------------//
   
   $.ajax({
-      url: 'https://api.imgur.com/3/album/4RlR7EB/images',
-      headers:{
-          'Authorization':'Client-ID 23492f2c1894b2f'
-      },
-      type: 'GET',
-      dataType: 'json',
-      success: function(data) { 
+    url: 'https://api.imgur.com/3/album/4RlR7EB/images',
+    headers:{
+        'Authorization':'Client-ID 23492f2c1894b2f'},
+    type: 'GET',
+    dataType: 'json',
 
-          $('body').css('background-image', 'url('+data.data[0].link+')');
-
-      },
-      error: function() { console.log("API FAIL");}
-  });
+  }).then(
+    (data) => { 
+      $('body').css('background-image', 'url('+data.data[0].link+')');
+    },
+    () => { 
+      console.log(` API FAIL :( `);
+    }
+  );
+    
 
   //------------------------------END IMGUR API-------------------------------//
 
@@ -578,3 +624,7 @@ document.addEventListener('DOMContentLoaded',() => {
 //--------------------------SOURCES------------------------------//
 // For imgur to ajax:
 // https://stackoverflow.com/questions/24912112/how-can-i-get-imgur-com-album-images-using-ajax-request
+
+//BattleShip Initial Thought Process 
+//https://www.youtube.com/watch?v=zSQIGzmcp2I
+//https://www.youtube.com/watch?v=G6JTM-zt-dQ

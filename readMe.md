@@ -26,7 +26,9 @@ The objective of the game is to sink all five (5) of your opponent's ship! If yo
 ## HOW TO PLAY
 Player will be able to sink computer's ships by clicking on the squares in the computer's grid. 
 
-If the square turn white -- It means that you've missed the ship.
+If the square turn blue -- It means that you've missed the ship, and your missiles hit the waters.
 If the square turns red -- It means that you've hit 1 tile of the ship.
 
 Your job is to figure out where and how did your opponent place their ship (horizontally / vertically) in their grids so that you can sink all five (5) of them. 
+
+GOOD LUCK!

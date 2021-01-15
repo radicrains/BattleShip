@@ -137,8 +137,8 @@ body{
 }
 
 .compSq-hide{
-    background-color: #493ee7d0; 
-    /*#493ee7d0 <-- GOD MODE*/ 
+    background-color: #3d3c4b07; 
+    /*#e73ecbd0 <-- GOD MODE*/ 
     /*#3d3c4b07 <-- Full invisibility*/
 }
 
@@ -179,9 +179,37 @@ body{
 }
 
 .hit{
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.514);
+    animation: ripples 2s ease-in-out infinite;
+    border-radius: 50%;
+
 }
 
 .miss{
-    background-color: white;
+    background-color: #493ee7d0;
+    animation: shadow-drop-center 4s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite both;
 }
+
+@keyframes ripples {
+    0% {
+      opacity: 1;
+      transform: scale(0.5);
+    }
+  
+    100% {
+      opacity: .7;
+      transform: scale(1);
+    }
+}
+
+@keyframes shadow-drop-center {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.35);
+              box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.35);
+    }
+  }
+  
