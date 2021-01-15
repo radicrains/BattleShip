@@ -469,6 +469,7 @@ $(() => {
       if(isUserSqUsed) {
         if(!isUserSqHit) {
           userSquares[randomNum].classList.add('hit');
+          audioBoom.play();
           // console.log(`Computer hits you!`);
           // console.log(userSquares[randomNum]);
 
