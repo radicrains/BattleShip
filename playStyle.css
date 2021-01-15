@@ -3,36 +3,15 @@
 
 
 body{
-    background-image: url(/images/battleship8.png);
+    /* background-image: url(/images/battleship8.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'Overlock', sans-serif;
 }
 
-.buttons{
-    font-size: 12px;
-    background-color: #3d3c4b;
-    padding: 10px 30px;
-    color: White;
-    border-radius: 4vh;
-    appearance: button;
-}
-
-.gameButtons{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.shipButtons{
-    display: flex;
-    justify-content: center;
-}
-
 .main-container{
-    height: 100vh;
-
+    height: 100vh; /*SOMETHING NEW: 100vh = 100 viewport height --> Follows the browser viewport. catered for mobile too.*/    
 }
 
 .game-container{
@@ -41,6 +20,7 @@ body{
     align-items: center;
     justify-content: center;
 }
+
 .infor-container{
     display: flex;
     flex-direction: column;
@@ -51,9 +31,10 @@ body{
     margin: 2vmin;
     display:grid;
     background-color: #3d3c4be3;
-    grid-template-rows: repeat(10, 4.6vmin);
-    grid-template-columns: repeat(10, 4.6vmin);
+    grid-template-rows: repeat(10, 4.6vmin); /* SOMETHING NEW: originally had issues with grid sizing due to borders ard each sq. this helps to unify the sq*/ 
+    grid-template-columns: repeat(10, 4.6vmin); /*vmin - will compare the viewport's height & width and make take the smaller number. 4.6 * 10 = grid is 46% of viewport*/ 
 }
+
 .grid-container{
     display: flex;
 }
@@ -74,61 +55,90 @@ body{
     width: 4.6vmin;
     height: 4.6vmin;
 }
+
 #turnMsg, #gameMsg{
     display: flex;
     justify-content: center;
 }
+
 .grid-title{
     width: 100%;
     display: flex;
     justify-content: space-around;
     font-size: 120%;
 }
+
+.buttons{
+    font-size: 12px;
+    background-color: #3d3c4b;
+    padding: 10px 30px;
+    color: White;
+    border-radius: 4vh; 
+    /* appearance: button; */
+}
+
+.gameButtons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.shipButtons{
+    display: flex;
+    justify-content: center;
+}
+
 .ship{
     display: flex;
     flex-wrap: wrap;
     margin: 1vmin;
-    width: calc(4.6vmin * var(--width,1));
+    width: calc(4.6vmin * var(--width,1)); /*SOMETHING NEW: calculate CSS. Due to ships having to be horizontal & vertical. calc() helps to just use 'units' for width & height of ship.*/
     height: calc(4.6vmin * var(--height,1));
 }
+
 .destroyer-x{
     --width: 2;
     --height: 1;
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
+
 .submarine-x, .cruiser-x{
     --width: 3;
     --height: 1;
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
+
 .battleship-x{
     --width: 4;
     --height: 1;
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
+
 .carrier-x{
     --width: 5;
     --height: 1;
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
+
 .used{
     background-color: rgba(248, 187, 96, 0.562);
 }
+
 .compSq-hide{
     background-color: #493ee7d0; 
-    /*#3d3c4bd7 <-- GOD MODE*/ 
+    /*#493ee7d0 <-- GOD MODE*/ 
     /*#3d3c4b07 <-- Full invisibility*/
 }
 
@@ -138,7 +148,7 @@ body{
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
 
 .submarine-y, .cruiser-y{
@@ -147,7 +157,7 @@ body{
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
 
 .battleship-y{
@@ -156,15 +166,16 @@ body{
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
+
 .carrier-y{
     --width: 1;
     --height: 5;
     background-color: rgba(248, 187, 96, 0.562);
     margin: 5px;
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
 
 .hit{

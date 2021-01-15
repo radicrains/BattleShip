@@ -549,4 +549,32 @@ document.addEventListener('DOMContentLoaded',() => {
     startButton.addEventListener('click', playGame);
 
   //------------------------------END OF GAME LOGIC-------------------------------//
+  //
+  //
+  //
+  //------------------------------START IMGUR API-------------------------------//
+  
+  $.ajax({
+      url: 'https://api.imgur.com/3/album/4RlR7EB/images',
+      headers:{
+          'Authorization':'Client-ID 23492f2c1894b2f'
+      },
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) { 
+
+          $('body').css('background-image', 'url('+data.data[0].link+')');
+
+      },
+      error: function() { console.log("API FAIL");}
+  });
+
+  //------------------------------END IMGUR API-------------------------------//
+
+
 });
+
+
+//--------------------------SOURCES------------------------------//
+// For imgur to ajax:
+// https://stackoverflow.com/questions/24912112/how-can-i-get-imgur-com-album-images-using-ajax-request
