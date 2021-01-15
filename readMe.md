@@ -1,5 +1,5 @@
 
-## BATTLESHIP
+## WELCOME TO BATTLESHIP
 
 Player vs Computer.
 
@@ -21,6 +21,9 @@ Once you're done placing your ships, click on the start button to start the game
 
 ## GAME OBJECTIVE
 The objective of the game is to sink all five (5) of your opponent's ship! If you sink them all before they sink yours, you will win the game.
+
+## GAME LINK
+https://radicrains.github.io/BattleShip/main.html
 
 
 ## HOW TO PLAY
