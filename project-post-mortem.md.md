@@ -18,22 +18,30 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 #### Approach and Process
 
 1. What in my process and approach to this project would I do differently next time?
+Time management. I felt that i spent a lot of my time worrying what game should i choose, as i was afraid i couldnt do it. At times it does feel nerve wrecking, but i have to tell myself that it is okay. Everyone is at their own pace. 
 
-1. What in my process and approach to this project went well that I would repeat next time?
 
---
+2. What in my process and approach to this project went well that I would repeat next time?
+Seeking opinions from my family. I realised that they may not be able to help you code, but they will be able to help give feedback on the asthetics / playability of the game. & to always breakdown your games to functions and tackle the functions one by one.  
+
+
+
 
 #### Code and Code Design
 
 1. What in my code and program design in the project would I do differently next time?
+ If i had more time, to sit and figure out why my jQuery didnt worked when i try element.hasClass('SqUsed). Because of this error, I used vanilla JS to code my games. To understand & find better APIs. To refactor my codes properly into Class, as it is pretty messy for me right now.
 
-1. What in my code and program design in the project went well? Is there anything I would do the same next time?
-
-  For each, please include code examples.
-  1. Code snippet up to 20 lines.
-  2. Code design documents or architecture drawings / diagrams.
+2. What in my code and program design in the project went well? Is there anything I would do the same next time?
+Learning about vh, vw, calc() & grid-template-rows was very useful for my grid CSS. It was easier to manage the various sizes of ship and their respective orientations. I believed with learning about variables in CSS, my CSS could be refactored. 
+ 
 
 #### Unit 1 Post Mortem
 1. What habits did I use during this unit that helped me?
+Writing/drawing out the codes helps with my thought process. 
+
 2. What habits did I have during this unit that I can improve on?
+My coding is still pretty basic / old age. Would be awesome if i could be able to improve on refactoring.
+
 3. How is the overall level of the course during this unit? (instruction, course materials, etc.)
+The course materials are fine. The homework, i feel that after submission, maybe we can have a QnA / sample to see and compare ourselves so that we know what we can improve on. 
