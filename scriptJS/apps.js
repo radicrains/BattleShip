@@ -68,16 +68,16 @@ $(() => {
   userShips=(array)=>{
     for(j=0;j<array.length; j++){
       userSq(array[j]);
-      // console.log(array[j])
+      console.log(array[j])
     }
   }
 
   userSq = (ship) => {
     for(i=0; i<ship.directions[0].length; i++) {
       const $shipContainer = $(`.${ship.name}-x`);
-      // console.log($shipContainer);
+      console.log($shipContainer);
       const $newSq = $('<div>').attr('id',`${ship.name}-${i}`).addClass(`${ship.name}`);
-      // console.log($newSq);
+      console.log($newSq);
       $shipContainer.append($newSq);
     }
   }
@@ -102,7 +102,7 @@ $(() => {
   generateCompShip= (array) => {
     for (let i=0; i<array.length; i++) {
       randomGenerate(array[i]);
-      // console.log(i);
+      console.log(i);
     }
   };
 
@@ -115,11 +115,11 @@ $(() => {
     // pick a random starting point - the comp ship length
     if (randomDirection === 0) {
       randomStartPoint = Math.abs(Math.floor(Math.random() * compSquares.length - (ship.directions[0].length * 1)));
-      // console.log(randomStartPoint);
+      console.log(randomStartPoint);
 
     } else if (randomDirection === 1) {
       randomStartPoint = Math.abs(Math.floor(Math.random() * compSquares.length - (ship.directions[0].length * 10)));
-      // console.log(randomStartPoint);
+      console.log(randomStartPoint);
     }
 
     
@@ -132,6 +132,7 @@ $(() => {
     // else to restart again so that the ship has a new random starting point, new directions & check again if sqIsUsed.
     if (!isUsed && !isAtRightEdge && !isAtLeftEdge) {
       current.forEach(index => compSquares[randomStartPoint + index].classList.add('used', `comp_${ship.name}`, 'compSq-hide'))
+      console.log(current.index);
     } else {
       randomGenerate(ship); 
     }
@@ -171,7 +172,7 @@ $(() => {
       $carrier.toggleClass('carrier-y');
 
       isShipHorizontal = false;
-      // console.log(isShipHorizontal);
+      console.log(`is horizontal: ${isShipHorizontal}`);
 
     } else if (!isShipHorizontal){
       $destroyer.toggleClass('destroyer-y');
@@ -181,7 +182,7 @@ $(() => {
       $carrier.toggleClass('carrier-y');
 
       isShipHorizontal = true
-      // console.log(isShipHorizontal);
+      console.log(`is horizontal: ${isShipHorizontal}`);
 
     }
   }
@@ -216,10 +217,10 @@ $(() => {
     //When player click on user ship (to drag) - get selected ship ID & Class
     ships.forEach(ship => ship.addEventListener('mousedown',(e) => {
       selectedShipNameWithIndex = e.target.id;
-      // console.log(selectedShipNameWithIndex); //log: destroyer -0
+      console.log(selectedShipNameWithIndex); //log: destroyer -0
 
       selectedShipClass = e.target.classList[0];
-      // console.log(selectedShipClass);  //log: destroyer
+      console.log(selectedShipClass);  //log: destroyer
     }));
 
 
@@ -227,10 +228,10 @@ $(() => {
     dragStart = (e) => {
 
       selectedShip = e.target;
-      // console.log(selectedShip); //log: <div class="shipdestroyer-x" draggable ='true'></div>
+      console.log(selectedShip); //log: <div class="shipdestroyer-x" draggable ='true'></div>
 
       selectedShipLength = e.target.childNodes.length;  
-      // console.log(selectedShipLength); //log: 2 (as destroyer only has 2 tiles)
+      console.log(selectedShipLength); //log: 2 (as destroyer only has 2 tiles)
     }
 
     dragOver = (e) => {
@@ -257,7 +258,7 @@ $(() => {
 
           //'generate' the ships in user grid by adding class 
           userSquares[parseInt(e.target.id) - selectedShipIndex + i].classList.add('used', selectedShipClass);
-          // logs: [99-1 + (0 & 1)] -> sq1 = 98. sq2 = 99 --> this e.target is the user grid e.target (when we drop at sq 99).
+          // this e.target is the user grid e.target (when we drop at sq 99) logs: [99-1 + (0 & 1)] -> sq1 = 98. sq2 = 99.
         }
 
       } else if (!isShipHorizontal) {
@@ -318,7 +319,7 @@ $(() => {
     let userCarrierCount = 0;
 
     userAttack = (square) => {
-      // console.log(`user start`);
+      console.log(`Player to start`);
       gameDisplay.innerHTML = ''; //to clear all & any existing text
       
       let isCompSqUsed = square.classList.contains('used');
@@ -332,23 +333,23 @@ $(() => {
 
           if (square.classList.contains('comp_destroyer')){
             userDestroyerCount++;
-            // console.log(`The destroyer has been hit: ${userDestroyerCount}`);
+            console.log(`The destroyer has been hit: ${userDestroyerCount}`);
           } 
           else if(square.classList.contains('comp_submarine')){
             userSubmarineCount++;
-            // console.log(`The submarine has been hit: ${userSubmarineCount}`);
+            console.log(`The submarine has been hit: ${userSubmarineCount}`);
           } 
           else if(square.classList.contains('comp_cruiser')){
             userCruiserCount++;
-            // console.log(`The cruiser has been hit: ${userCruiserCount}`);
+            console.log(`The cruiser has been hit: ${userCruiserCount}`);
           }
           else if(square.classList.contains('comp_battleship')){
             userBattleshipCount++;
-            // console.log(`The battleship has been hit: ${userBattleshipCount}`);
+            console.log(`The battleship has been hit: ${userBattleshipCount}`);
           }
           else if(square.classList.contains('comp_carrier')){
             userCarrierCount++;
-            // console.log(`The carrier has been hit: ${userCarrierCount}`);
+            console.log(`The carrier has been hit: ${userCarrierCount}`);
           }
 
           userCheckWin();
@@ -400,36 +401,36 @@ $(() => {
 
       if(!isCompDestroyerSink && userDestroyerCount === 2) {
         isCompDestroyerSink = true;
-        // console.log(isCompDestroyerSink);  
+        console.log(`destroyer ship sinks? - ${isCompDestroyerSink}`);  
         gameDisplay.innerHTML=`You sunk computer's Destroyer`; 
       }
 
       if(!isCompSubmarineSink && userSubmarineCount === 3) {
         isCompSubmarineSink = true;
-        // console.log(isCompSubmarineSink);  
+        console.log(`submarine ship sinks? - ${isCompSubmarineSink}`);  
         gameDisplay.innerHTML=`You sunk computer's Submarine`; 
       }
 
       if(!isCompCruiserSink && userCruiserCount === 3) {
         isCompCruiserSink = true;
-        // console.log(isCompCruiserSink);  
+        console.log(`cruiser ship sinks? -${isCompCruiserSink}`);  
         gameDisplay.innerHTML=`You sunk computer's Cruiser`; 
       }
 
       if(!isCompBattleshipSink && userBattleshipCount === 4) {
         isCompBattleshipSink = true;
-        // console.log(isCompBattleshipSink);  
+        console.log(`battleship ship sinks? - ${isCompBattleshipSink}`);  
         gameDisplay.innerHTML=`You sunk computer's Battleship`; 
       }
 
       if(!isCompCarrierSink && userCarrierCount === 5) {
         isCompCarrierSink = true;
-        // console.log(isCompCarrierSink);  
+        console.log(`carrier ship sinks? - ${isCompCarrierSink}`);  
         gameDisplay.innerHTML=`You sunk computer's Carrier`; 
       }
       if(isCompDestroyerSink && isCompSubmarineSink && isCompCruiserSink && isCompBattleshipSink && isCompCarrierSink) {
         gameDisplay.innerHTML= "YOU WIN";
-        // console.log('YOU WIN');
+        console.log('YOU WIN');
         gameOver();
         return;
       }
@@ -456,7 +457,7 @@ $(() => {
 
     //---TO RE-DO. FOLLOW PLAYER ATTACK FUNCTION ---//
     computerAttack = () => {
-      console.log(`computer Start`);
+      console.log(`computer to Start`);
       gameDisplay.innerHTML = ''; //to clear all & any existing text
       
       let randomNum = Math.floor(Math.random()*100);
@@ -470,28 +471,28 @@ $(() => {
         if(!isUserSqHit) {
           userSquares[randomNum].classList.add('hit');
           audioBoom.play();
-          // console.log(`Computer hits you!`);
-          // console.log(userSquares[randomNum]);
+          console.log(`Computer hits you!`);
+          console.log(userSquares[randomNum]);
 
           if (userSquares[randomNum].classList.contains('destroyer')){
             compDestroyerCount++;
-            // console.log(`Computer hits your destroyer: ${compDestroyerCount}`);
+            console.log(`Computer hits your destroyer: ${compDestroyerCount}`);
           } 
           if(userSquares[randomNum].classList.contains('submarine')){
             compSubmarineCount++;
-            // console.log(`Computer hits your submarine: ${compSubmarineCount}`);
+            console.log(`Computer hits your submarine: ${compSubmarineCount}`);
           } 
           if(userSquares[randomNum].classList.contains('cruiser')){
             compCruiserCount++;
-            // console.log(`Computer hits your cruiser: ${compCruiserCount}`);
+            console.log(`Computer hits your cruiser: ${compCruiserCount}`);
           }
           if(userSquares[randomNum].classList.contains('battleship')){
             compBattleshipCount++;
-            // console.log(`Computer hits your battleship: ${compBattleshipCount}`);
+            console.log(`Computer hits your battleship: ${compBattleshipCount}`);
           }
           if(userSquares[randomNum].classList.contains('carrier')){
             compCarrierCount++;
-            // console.log(`Computer hits your carrier: ${compCarrierCount}`);
+            console.log(`Computer hits your carrier: ${compCarrierCount}`);
           }
         }else if(isUserSqHit){
           computerAttack();
@@ -499,8 +500,8 @@ $(() => {
         }
       } else if(!isUserSqUsed && !isUserSqMiss) {
         userSquares[randomNum].classList.add('miss');
-        // console.log(`Computer misses your ship!`);
-        // console.log(userSquares[randomNum]);
+        console.log(`Computer misses your ship!`);
+        console.log(userSquares[randomNum]);
       } else if(isUserSqMiss) {
         computerAttack();
         return;
@@ -510,7 +511,7 @@ $(() => {
 
       if(!isGameOver) {
         currentPlayer = 'user';
-        // console.log(`${currentPlayer}'s turn`);
+        console.log(`${currentPlayer}'s turn`);
         turnDisplay.innerHTML = `Player's turn to Attack`;
 
       } else return;
@@ -534,32 +535,32 @@ $(() => {
 
       if(!isUserDestroyerSink && compDestroyerCount === 2) {
         isUserDestroyerSink = true;
-        // console.log(isUserDestroyerSink);  
+        console.log(isUserDestroyerSink);  
         gameDisplay.innerHTML=`Computer sunk your Destroyer`; 
       }
       if(!isUserSubmarineSink && compSubmarineCount === 3) {
         isUserSubmarineSink = true;
-        // console.log(isUserSubmarineSink);  
+        console.log(isUserSubmarineSink);  
         gameDisplay.innerHTML=`Computer sunk your Submarine`; 
       }
       if(!isUserCruiserSink && compCruiserCount === 3) {
         isUserCruiserSink = true;
-        // console.log(isUserCruiserSink);  
+        console.log(isUserCruiserSink);  
         gameDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
       if(!isUserBattleshipSink && compBattleshipCount === 4) {
         isUserBattleshipSink = true;
-        // console.log(isUserBattleshipSink);  
+        console.log(isUserBattleshipSink);  
         gameDisplay.innerHTML=`Computer sunk your Cruiser`;
       }
       if(!isUserCarrierSink && compCarrierCount === 5) {
         isUserCarrierSink = true;
-        // console.log(isUserCarrierSink);  
+        console.log(isUserCarrierSink);  
         gameDisplay.innerHTML=`Computer sunk your Cruiser`; 
       }
       if(isUserDestroyerSink && isUserSubmarineSink && isUserCruiserSink && isUserBattleshipSink && isUserCarrierSink) {
         gameDisplay.innerHTML= "COMPUTER WIN";
-        // console.log('COMP WIN');
+        console.log('COMP WIN');
         gameOver();
         return;
       }
