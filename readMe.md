@@ -89,7 +89,12 @@ These 2 critical events information needed to calculate the squares needed to "g
 
 # SCREENSHOT
 
+Landing Page
 <img src='/images/main_page.png'/>
+
+Game Pages
 <img src='/images/1.png'/>
+
 <img src='/images/2.png'/>
+
 <img src='/images/3.png'/>
